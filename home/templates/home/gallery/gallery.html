@@ -1,0 +1,87 @@
+{%  extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <!-- CONTENT
+      ================================================== -->
+
+    <!-- section header -->
+    <section class="section__header" id="section__header">
+    	<div class="container">
+    		<div class="row">
+  	    	<div class="col-sm-12">
+  	    		<div class="welcome__content">
+							<h1 class="welcome_content__title">Our gallery</h1>
+
+              <!-- Breadcrumbs -->
+              <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Gallery</li>
+              </ol>
+
+	  					<p class="welcome_content__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+		  			</div> <!-- .welcome__content -->
+    	    </div>
+	    	</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+			<div class="home__bg gallery__bg"></div>
+    </section> <!-- / .section__header -->
+
+    <!-- section gallery-alt -->
+    <section class="section__gallery-alt">
+    	<div class="container">
+    		<div class="row">
+    		  <div class="col-sm-12">
+          <h2 class="subheading">Some shots of our beautiful interior</h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+    				<p class="section__subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti sit dicta quae natus quasi ratione quis id, tenetur atque blanditiis aperiam mollitia enim corporis ex praesentium reprehenderit.</p>
+    		  </div>
+    		</div> <!-- / .row -->
+    		<div class="row">
+    		  <div class="col-xs-12">
+    		  	<!-- Nav tabs -->
+            <ul class="nav nav-tabs gallery__nav" role="tablist">
+              <li role="presentation" class="gallery-nav__link active">
+                <a href="#" role="tab" data-filter=".all">
+                  <span>All</span>
+                </a>
+              </li>
+              {% for title in roomtitle %}
+              <li role="presentation" class="gallery-nav__link">
+                <a href="#" role="tab" data-filter=".{{ title.title|cut:' ' }}">
+                  <span>{{title.title}}</span>
+                </a>
+              </li>
+              {% endfor %}
+             
+            </ul> <!-- / .gallery__nav -->
+    		  </div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    	<div class="container-fluid">
+		    <div id="gallery__items" class="row">
+          
+            
+            {% for room in photo %}
+
+            <div class="{{ room.image_type.title|cut:' ' }}  col-xs-12 col-sm-6 col-md-4 col-lg-3 gallery__item all">
+              
+              <a href="#" data-lightbox="gallery" data-title="Your caption">
+                <img src="{{room.image.url}}" class="img-responsive" alt="...">
+              </a>
+            </div>
+            {% endfor %}
+         
+          </div>
+        </div> <!-- .row -->
+	            
+	    </div> <!-- / .container-fluid -->
+    </section> <!-- / .section__gallery-alt -->
+  
+    
+{% endblock %}

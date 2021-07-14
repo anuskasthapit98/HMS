@@ -1,0 +1,250 @@
+
+{% extends 'home/base.html' %}
+{% load static %}
+    {% block content %}
+
+    <!-- CONTENT
+      ================================================== -->
+
+    <!-- section header -->
+    <section class="section__header">
+    	<div class="container">
+    	  <div class="row">
+    	    <div class="col-sm-12">
+    	    	<div class="welcome__content">
+							<h1 class="welcome_content__title">Reservation</h1>
+
+							<!-- Breadcrumbs -->
+              <ol class="breadcrumb">
+							  <li><a href="{% url 'home' %}">Home</a></li>
+							  <li class="active">Reservation</li>
+							</ol>
+
+    					<p class="welcome_content__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    				</div> <!-- .welcome__content -->
+    	    </div>
+    	  </div> <!-- / .row -->
+    	</div> <!-- / .container -->
+			<div class="home__bg reservation__bg"></div>
+    </section> <!-- / .section header -->
+
+    <!-- section reservation -->
+    <section class="section__reservation">
+    	<div class="container">
+    	  <div class="row">
+    	    <div class="col-sm-5 col-sm-push-7 col-md-4 col-md-push-8">
+				{% if selected_room %}
+    	    	<div class="booking__details-body">
+    	    		<p class="subheading">Booking details</p>
+    	    		<h2 class="section__heading">Selected room</h2>
+    	    		<figure class="room__details">
+							{% for img in selected_room.image.all|slice:1 %}
+								<img src="{{ img.image.url }}" class="img-responsive" alt="...">
+							{% endfor %}
+								<figcaption>
+									<h3>{{ selected_room.room_type }}</h3>
+									<div class="room__price">
+										{{ selected_room.price }} <small>/ night</small>
+									</div>
+									<p class="room__desc">{{ selected_room.description|safe|truncatewords:30 }}</p>
+								</figcaption>
+							</figure> <!-- / .room__details -->
+					<ul class="details-info">
+
+						<li class="total-price">
+						<label>Room price</label>
+						<p>{{ selected_room.price }}/Nights</p>
+						</li>
+
+					
+					</ul>
+  	    		</div> <!-- .booking__details-body -->
+				{% endif %}
+  	    		<div class="info__body">
+							<p class="info__title">Information</p>
+							<ul class="info__content">
+					<li>
+					<p class="info-text">If you have some questions with booking please contact us.</p>
+					</li>
+	            {% for c in contact|slice:1 %}
+ 	           		<li>
+              			 <i class="icon ion-android-pin"></i>
+              <div class="contact-info-content">
+                <div class="title">Address</div>
+                <div class="description">{{c.address}}</div>
+              </div>
+           			</li>
+ 	          		<li>
+              			<i class="icon ion-android-call mr-2"> </i>
+             			<div class="contact-info-content">
+                			<div class="title">Phone / Fax</div>
+                			<div class="description"> {{c.phone}} / {{c.fax}}</div>
+              			</div>
+            		</li>
+ 	           		<li>
+              			<i class="icon ion-android-mail"> </i>
+              			<div class="contact-info-content">
+                			<div class="title">E-mail</div>
+                			<div class="description"> {{c.email}}</div>
+              			</div>
+            		</li>
+            	{%endfor%}
+	            </ul> <!-- .info__content -->
+  	    		</div> <!-- / .info__body -->
+    	    </div>
+    	    <div class="col-sm-7 col-sm-pull-5 col-md-8 col-md-pull-4">
+    	    	<div class="reservation__form-body">
+    	    		<p class="subheading">Booking form</p>
+    	    		<h2 class="section__heading">Personal info</h2>
+    	    		<p class="section__subheading">Feel free to book best hotel room in our hotel.</p>
+
+							<!-- Alert message -->
+              <div class="alert" id="form_reservation" role="alert"></div>
+
+              <!-- Please carefully read the README.pdf file in order to setup the PHP reservation form properly -->
+
+              <form id="reservation-form_sendemail" action="" class="reservation__form" data-animate-in="animateUp" method="POST">
+				{% csrf_token %}
+				<div class="col-sm-12 col-md-6">
+              		<div class="form-group">
+	                  <label for="check-in" >Check In date</label>
+	                  <span>{{ form.check_in_date }}</span>
+					  <span class="form-error">{{ form.errors.check_in_date }}</span>
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+	              	<div class="form-group">
+	                  <label for="check-out">Check Out date</label>
+	                  <span>{{ form.check_out_date }}</span>
+					  <span class="form-error">{{ form.errors.check_out_date }}</span>
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+	              	<div class="form-group">
+	                  <label for="form-adults" >Adults</label>
+	                  {{ form.adult }}
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+	              	<div class="form-group">
+	                  <label for="form-children" >Children</label>
+	                  	{{ form.children}}
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+              	<div class="col-sm-12 col-md-6">
+              		<div class="form-group">
+	                  <label for="first_name" >First name</label>
+	                  {{ form.first_name }}
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+              		<div class="form-group">
+	                  <label for="last-name" >Last name</label>
+	                  {{ form.last_name }}
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="email" >Email</label>
+	                 {{ form.email }}
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="phone" >Phone</label>
+	                  {{ form.phone }}
+	                  <span class="help-block"></span>
+	                </div>
+	              </div>
+	              <div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="address-line1" >Address line 1</label>
+	                  {{ form.address_1 }}
+	                </div>
+              	</div>
+              	<div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="address-line2" >Address line 2</label>
+	                  {{ form.address_2 }}
+	                  <span class="help-block"></span>
+	                </div>
+              	</div>
+              	<div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="state" >State / Region</label>
+	                  {{ form.state }}
+	                  <span class="help-block"></span>
+	                </div>
+              	</div>
+              	<div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="city" >City</label>
+	                  {{ form.city }}
+	                  <span class="help-block"></span>
+	                </div>
+              	</div>
+              	<div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="country" >Country</label>
+	                  {{ form.country }}
+	                  <span class="help-block"></span>
+	                </div>
+              	</div>
+              	<div class="col-sm-12 col-md-6">
+	                <div class="form-group">
+	                  <label for="zip-code" >Zip Code</label>
+	                  {{ form.zip_code }}
+	                  <span class="help-block"></span>
+	                </div>
+              	</div>
+				{% if selected_room %}
+				<div class="col-sm-12 col-md-6" hidden>
+					<div class="form-group">
+						<label for="form-children" >Select Room</label>
+						{{ form.selected_room }}
+						<span class="form-error">{{ form.errors.selected_room }}</span>
+						<span class="help-block"></span>
+				  	</div>
+				</div>
+				{% else %}
+				<div class="col-sm-12 col-md-6">
+					<div class="form-group">
+						<label for="form-children" >Select Room</label>
+						{{ form.selected_room }}
+						<span class="form-error">{{ form.errors.selected_room }}</span>
+						<span class="help-block"></span>
+				  	</div>
+				</div>
+				{% endif %}
+              	<div class="col-sm-12">
+	                <div class="form-group">
+	                  <label for="requirements" >Special requirements</label>
+	                  {{ form.special_req }}
+	                  <span class="help-block"></span>
+	                </div>
+              	</div>
+               	<div class="col-sm-12">
+               		<p>
+               			<input type="checkbox" name="checkbox"> I have read and accept <a href="#" class="conditions">the terms and conditions.</a>
+               		</p>
+               		<button type="submit" class="btn btn-booking">Book now by email</button>
+               	</div>
+              </form> <!-- .reservation__form -->
+            </div> <!-- .reservation__form-body -->
+          </div>
+    	  </div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    </section> <!-- / .section reservation -->
+
+{% endblock  %}
+
+{% block script %}
+
+{% endblock %}

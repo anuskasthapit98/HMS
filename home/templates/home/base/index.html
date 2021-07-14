@@ -1,0 +1,660 @@
+{% extends 'home/base.html' %} {% load static %} {% block content %}
+<!-- section home -->
+<section class="section__home" id="section__home">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="welcome__content">
+          <!-- logo -->
+          <h1 class="welcome_content__title">Sunset Hotel</h1>
+          <p class="welcome_content__title-primary">grand</p>
+
+          <div class="divider">
+            <hr class="line1" />
+            <hr class="line2" />
+            <hr class="line1" />
+            
+          </div>
+          <!-- / .divider -->
+
+          <p class="welcome_content__desc">
+            In our hotel you will find everything you need to enjoy your
+            vacation
+          </p>
+
+          <!-- button -->
+          <a href="{% url 'about' %}" class="btn btn-reservation">Explore it</a>
+        </div>
+        <!-- .welcome__content -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+
+  <!-- background image (insert via CSS) -->
+  <div class="home__bg"></div>
+</section>
+<!-- / .section__home -->
+
+<!-- section availability -->
+<section class="section__availability">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <!-- Reservation form -->
+        <form class="reservation__form" action="{% url 'rooms' %}" method="GET">
+          <div class="form-group">
+            <div class="form-group__inner">
+              <label for="reservation__check-in">Arrival date</label>
+              <input
+                type="text"
+                name="arrival_date"
+                class="form-control date"
+                id="reservation__check-in"
+                value="01 May 2021"
+              />
+            </div>
+            <!-- / .form-group__inner -->
+          </div>
+          <!-- / .form-group -->
+          <div class="form-group">
+            <div class="form-group__inner">
+              <label for="reservation__check-out">Departure date</label>
+              <input
+                type="text"
+                name="departure_date"
+                class="form-control date"
+                id="reservation__check-out"
+                value="02 May 2021"
+              />
+            </div>
+            <!-- / .form-group__inner -->
+          </div>
+          <!-- / .form-group -->
+          <div class="form-group">
+            <div class="form-group__inner">
+              <label for="reservation__adults">Adults</label>
+              <input type="text" name = "adults" id="reservation__adults" />
+              <div class="dropdown reservation-dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="adults-dropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  <span>1 Adult</span>
+                  <i class="icon ion-chevron-down"></i>
+                </button>
+                  <ul class="dropdown-menu" aria-labelledby="adults-dropdown">
+                    <li><a href="#">1 Adult</a></li>
+                    <li><a href="#">2 Adults</a></li>
+                    <li><a href="#">3 Adults</a></li>
+                  </ul> 
+              </div>
+              <!-- . -->
+            </div>
+            <!-- / .form-group__inner -->
+          </div>
+          <!-- / .form-group -->
+          <div class="form-group">
+            <div class="form-group__inner">
+              <label for="reservation__children">Children</label>
+              <input type="text" name="children" id="reservation__children" />
+              <div class="dropdown reservation-dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="children-dropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  <span>1 Child</span>
+                  <i class="icon ion-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="children-dropdown">
+                  <li><a href="#">1 Child</a></li>
+                  <li><a href="#">2 Children</a></li>
+                  <li><a href="#">3 Children</a></li>
+                </ul>
+              </div>
+              <!-- . -->
+            </div>
+            <!-- / .form-group__inner -->
+          </div>
+              <!-- / .row -->
+          <!-- <div class="row mx-auto">
+            <div class="col-xs-12"> -->
+              <!-- Reservation button -->
+              <div class="reservation__button  ">
+                <button id="reserve" type="submit" class="btn btn-reservation">
+                  Check availability
+                </button>
+              </div>
+              <!-- / .reservation__button -->
+            <!-- </div>
+          </div> -->
+    <!-- / .row -->
+          <!-- / .form-group -->
+        </form>
+        <!-- / .reservation__form -->
+      </div>
+    </div>
+
+  </div>
+  <!-- / .container -->
+</section>
+<!-- .section__availability -->
+
+<!-- section about -->
+<section class="section__about" id="section__about">
+
+  <div class="container">
+  {% for about in about %}
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section__title">{{about.title}}</h2>
+        <div class="divider">
+          <hr class="line1" />
+          <hr class="line2" />
+          <hr class="line1" />
+        </div>
+        <!-- / .divider -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="section_about__content">
+        <div class="col-md-6">
+          <div class="about__pic">
+            <img src="{{about.image.url }}" class="img-responsive" alt="...">
+          </div>
+          <!-- / .about__pic -->
+        </div>
+        <div class="col-md-6">
+          <div class="about__desc">
+            {{about.description|safe}}
+            <a href="{% url 'about' %}" class="btn btn-default">Learn More</a>
+          </div>
+          <!-- / .about__desc -->
+        </div>
+      </div>
+      <!-- / .section_about__content -->
+    </div>
+    {% endfor %}
+    <!-- / .row -->
+  </div>
+  
+</section>
+<!-- / .section__about -->
+
+<!-- section best-rooms -->
+<section class="section__best-rooms">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section__title">Our <strong>Best rooms</strong></h2>
+        <div class="divider">
+          <hr class="line1" />
+          <hr class="line2" />
+          <hr class="line1" />
+        </div>
+        <!-- / .divider -->
+        <p class="section__subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti sit
+          dicta quae natus quasi ratione quis id, tenetur atque blanditiis.
+        </p>
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+  <div class="container">
+    <div class="best-rooms__content">
+      <div class="row">
+        {% for room in room|slice:4 %}
+        <div class="col-sm-6">
+          <figure class="best-rooms__item">
+            {% for img in room.image.all|slice:1 %}
+            <img src="{{ img.image.url }}" class="img-responsive" alt="..." />
+            {% endfor %}
+            <figcaption>
+              <h3>{{ room.title }}</h3>
+              <div class="item__price">
+                {{ room.price }} <small>/ night</small>
+              </div>
+              <p class="item__desc">
+                {{room.description|truncatewords:20|safe }}
+              </p>
+              <a href="{% url 'reservation' %}?room_id={{ room.pk }}" class="btn-book"
+                >Book now <i class="icon ion-chevron-right"></i
+                ><i class="icon ion-chevron-right"></i
+              ></a>
+            </figcaption>
+          </figure>
+          <!-- / .best-rooms__item -->
+        </div>
+        {% endfor %}
+      </div>
+      <!-- / .row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="rooms__button">
+            <a href="{% url 'rooms' %}" class="btn">See all rooms</a>
+          </div>
+          <!-- / .rooms__button -->
+        </div>
+      </div>
+      <!-- / .row -->
+    </div>
+    <!-- / .best-rooms__content -->
+  </div>
+  <!-- / .container -->
+</section>
+<!-- / .section__best-rooms -->
+
+<!-- section services -->
+<section class="section__services">
+  <div class="container-fluid">
+    <div class="row">
+    {%for service in service%}
+      <div class="col-md-3 col-sm-6">
+        <div class="services__item">
+          <h2 class="services_item__title">{{service.service_type_name}}</h2>
+          <div class="services_item__divider">
+            <i class="icon ion-android-star"></i>
+            <i class="icon ion-android-star"></i>
+            <i class="icon ion-android-star"></i>
+          </div>
+          <!-- .services_item__divider -->
+          <p class="services_item__desc">
+           {{service.service_type_description}}
+          </p>
+        </div>
+        <!-- .services__item -->
+      </div>
+    {%endfor%}
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+<!-- / .section__services -->
+
+<!-- section gallery -->
+<section class="section__gallery">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section__title">Our <strong>Gallery</strong></h2>
+        <div class="divider">
+          <hr class="line1" />
+          <hr class="line2" />
+          <hr class="line1" />
+        </div>
+        <!-- / .divider -->
+        <p class="section__subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti sit
+          dicta quae natus quasi ratione quis id, tenetur atque blanditiis
+          aperiam mollitia enim corporis ex praesentium reprehenderit.
+        </p>
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div
+          id="gallery__carousel"
+          class="owl-carousel owl-theme gallery__body"
+        >
+          {% for photo in photos %}
+          <div class="gallery__item">
+            <a
+              href="{{ photo.image.url }}"
+              data-lightbox="gallery"
+              data-title="{{ photo.caption }}"
+            >
+              <img
+                src="{{ photo.image.url }}"
+                class="img-responsive"
+                alt="..."
+              />
+            </a>
+          </div>
+          <!-- .gallery__item -->
+          {% endfor %}
+        </div>
+        <!-- .gallery__body -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+<!-- / .section__gallery -->
+
+<section class="section__testimonials">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section__title"><strong>Testimonials</strong></h2>
+        <div class="divider">
+          <hr class="line1" />
+          <hr class="line2" />
+          <hr class="line1" />
+        </div>
+        <!-- / .divider -->
+        <p class="section__subtitle testimonials__subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti sit
+          dicta quae natus quasi ratione quis id, tenetur atque blanditiis
+          aperiam.
+        </p>
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div
+          id="testimonials__carousel"
+          class="owl-carousel owl-theme testimonials__body"
+        >
+          {% for test in test %}
+          <div class="testimonials__wrapper">
+            <div class="testimonials__item">
+              <div class="testimonials__img">
+                <img
+                  src="{{test.image.url}}"
+                  class="img-responsive"
+                  alt="..."
+                />
+              </div>
+              <div class="testimonials__caption">
+                <h3 class="testimonials_caption__name">{{test.name}}</h3>
+                <p class="testimonials_caption__prof">{{test.profession}}</p>
+                <p class="testimonials_caption__text">{{test.voice}}</p>
+              </div>
+              <!-- .testimonials__caption -->
+            </div>
+            <!-- .testimonials__item -->
+          </div>
+          <!-- .testimonials__wrapper -->
+
+          {% endfor %}
+        </div>
+        <!-- .testimonials__body -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+<!-- / .section__testimonials -->
+
+<!-- section Events -->
+<section class="section__events">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section__title">Our news <strong>& events</strong></h2>
+        <div class="divider">
+          <hr class="line1" />
+          <hr class="line2" />
+          <hr class="line1" />
+        </div>
+        <!-- / .divider -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 hidden-xs col-sm-6 col-md-6 col-lg-3 col-lg-push-9">
+        <div class="news__title">
+          <div>News</div>
+        </div>
+      </div>
+      {% for n in news|slice:3%}
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-lg-pull-3">
+        <div class="events__item">
+          <div class="events-item__img">
+            <img src="{{ n.image.url }}" class="img-responsive" alt="..." />
+          </div>
+          <div class="events-item__body">
+            <div class="events-item__header">
+              <div class="events-item__date">
+                <p class="item_date__nbr">{{n.created_at|date:"d"}}</p>
+                <p class="item_date__mounth">{{n.created_at|date:"M"}}</p>
+              </div>
+              <!-- .events-item__date -->
+              <div class="events-item__content">
+                <div class="events-item__title">
+                  <h3>{{n.title}}</h3>
+                </div>
+                <div class="events-item__info">
+                  <ul class="item-info__list">
+                    <li class="info-list__item">
+                      <i class="ion ion-android-person"></i> by {{n.created_by}}
+                    </li>
+                    <li class="info-list__item">
+                      <i class="ion ion-android-chat" aria-hidden="true"></i> 5
+                      Comments
+                    </li>
+                  </ul>
+                  <!-- .item-info__list -->
+                </div>
+                <!-- .events-item__info -->
+              </div>
+              <!-- .events-item__content -->
+            </div>
+            <!-- .events-item__header -->
+            <div class="events-item__text">
+              {{n.description | truncatewords:10 }}
+            </div>
+
+            <!-- .events-item__text -->
+            <div class="events-item__link">
+              <a href="{% url 'news-detail' n.pk %}">Read More ➔</a>
+            </div>
+            <!-- .events-item__link -->
+          </div>
+          <!-- / .events-item__body -->
+        </div>
+        <!-- .events__item -->
+      </div>
+      {%endfor%}
+    </div>
+    <!-- / .row -->
+    <div class="row">
+      <div class="col-xs-12 hidden-xs col-sm-6 col-md-6 col-lg-3">
+        <div class="events__title">
+          <div>Events</div>
+        </div>
+      </div>
+
+      {% for event in event|slice:3 %}
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+        <div class="events__item">
+          <div class="events-item__img">
+            <img src="{{ event.image.url }}" class="img-responsive" alt="..." />
+          </div>
+          <div class="events-item__body">
+            <div class="events-item__header">
+              <div class="events-item__date">
+                <p class="item_date__nbr">{{ event.created_at|date:"d" }}</p>
+                <p class="item_date__mounth">{{ event.created_at|date:"M" }}</p>
+              </div>
+              <!-- .events-item__date -->
+              <div class="events-item__content">
+                <div class="events-item__title">
+                  <h3>{{ event.title }}</h3>
+                </div>
+                <div class="events-item__info">
+                  <ul class="item-info__list">
+                    <li class="info-list__item">
+                      <i class="ion ion-android-person"></i> by
+                      {{event.created_by }}
+                    </li>
+                    <li class="info-list__item">
+                      <i class="ion ion-android-chat" aria-hidden="true"></i> 2
+                      Comments
+                    </li>
+                  </ul>
+                  <!-- .item-info__list -->
+                </div>
+                <!-- .events-item__info -->
+              </div>
+              <!-- .events-item__content -->
+            </div>
+            <!-- .events-item__header -->
+            <div class="events-item__text">
+              {{event.description|truncatewords:20}}
+            </div>
+            <div class="events-item__link">
+              <a href="{% url 'event-detail' event.pk %}">Read More ➔</a>
+            </div>
+            <!-- .events-item__link -->
+          </div>
+          <!-- / .events-item__body -->
+        </div>
+        <!-- .events__item -->
+      </div>
+      {% endfor %}
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+<!-- / .section__events -->
+
+<!-- section Contacts -->
+<section class="section__contacts">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section__title"><strong>Contact</strong> us</h2>
+        <div class="divider">
+          <hr class="line1" />
+          <hr class="line2" />
+          <hr class="line1" />
+        </div>
+        <!-- / .divider -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+  <div class="section_row">
+    <div id="map"></div>
+  </div>
+  <!-- / .section_row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="contacts__info">
+          <p class="contacts_info__title">Information</p>
+          {% for contact in contact|slice:1 %}
+          <ul class="contacts_info__content">
+            <li>
+              <i class="icon ion-android-pin"></i>
+              <div class="contact-info-content">
+                <div class="title">Address</div>
+                <div class="description">{{contact.address}}</div>
+              </div>
+            </li>
+            <li>
+              <i class="icon ion-android-call"></i>
+              <div class="contact-info-content">
+                <div class="title">Phone / Fax</div>
+                <div class="description">
+                  {{contact.phone}}/ {{contact.fax}}
+                </div>
+              </div>
+            </li>
+            <li>
+              <i class="icon ion-android-mail"></i>
+              <div class="contact-info-content">
+                <div class="title">E-mail</div>
+                <div class="description">{{contact.email}}</div>
+              </div>
+            </li>
+          </ul>
+          {% endfor %}
+          <!-- .contacts_info__content -->
+        </div>
+        <!-- / .contacts__info -->
+        <p class="subheading">
+          If you have any questions don't hesistate to contact us.
+        </p>
+      </div>
+      <div class="col-sm-7">
+        <div class="section-contacts__form_body">
+          <p class="section-contacts__title">Get in touch</p>
+
+          <!-- Please carefully read the README file in order to setup the PHP contact form properly -->
+
+          <!-- Alert message -->
+          <div class="alert" id="form_message" role="alert"></div>
+
+          <!-- Form -->
+         <form method="POST">
+            {% csrf_token %}
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email" class="sr-only">Email address</label>
+              {{form.email}}
+            </div>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name" class="sr-only">Name</label>
+              {{form.full_name}}
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="message" class="sr-only">Message</label>
+              {{form.message}}
+            </div>
+
+            <!-- Note -->
+            <div class="form-group">
+              <small class="text-muted"> * All fields are mandatory. </small>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-default">Send Message</button>
+          </form>
+          <!-- .contacts__form -->
+        </div>
+        <!-- / .secction-contacts__form_body -->
+      </div>
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</section>
+<!-- / .section__contacts -->
+<script>
+$(documet).ready(function() {
+  $('#reserve').click(function(){
+    alert($('#reservation__adults').val());
+  })
+})
+</script>
+
+
+{% endblock %}
+

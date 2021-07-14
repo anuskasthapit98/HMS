@@ -1,0 +1,208 @@
+{% load static %}
+{% load active_link_tags %}
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="{% url 'dashboard:admin-dashboard' %}" class="brand-link">
+    <img
+      src="{% static 'dashboard/assets/dist/img/AdminLTELogo.png' %}"
+      alt="AdminLTE Logo"
+      class="brand-image img-circle elevation-3"
+      style="opacity: 0.8"
+    />
+    <span class="brand-text font-weight-light">Sunset Hotel</span>
+  </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img
+          src="{{request.user.account.image.url}}"
+          class="img-circle elevation-2"
+          alt="User Image"
+        />
+      </div>
+      <div class="info ">
+        <a href="{% url 'dashboard:admin-dashboard' %}" class="d-block"> Welcome! {% if request.user.is_authenticated %}
+                                              {{request.user.username}}
+                                              {% endif %}</a>
+      </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    {% comment %} <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input
+          class="form-control form-control-sidebar"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div> {% endcomment %}
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a href="{% url 'dashboard:admin-dashboard' %}" class="nav-link {% active_link 'dashboard:admin-dashboard' 'active' %}">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+    
+            </p>
+          </a>
+         
+        </li>
+      
+        <li class="nav-item">
+          <a href="{% url 'dashboard:room-list' %}" class="nav-link {% active_link 'dashboard:room-list' 'active' %}">
+            <i class="nav-icon fa fa-bed"></i>
+            <p>Rooms</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:room_category' %}" class="nav-link {% active_link 'dashboard:room_category' 'active' %}">
+            <i class="nav-icon fa fa-bed"></i>
+            <p>Room Category</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:feature-list' %}" class="nav-link {% active_link 'dashboard:feature-list' 'active' %}">
+            <i class="nav-icon fa fa-list"></i>
+            <p>Room Feature</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:room-comment-list' %}" class="nav-link {% active_link 'dashboard:room-comment-list' 'active' %}">
+            <i class="nav-icon fa fa-comment"></i>
+            <p>Room Reviews</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:image-list' %}" class="nav-link {% active_link 'dashboard:image-list' 'active' %}">
+            <i class="nav-icon far fa-image"></i>
+            <p>Gallery</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:news-list' %}" class="nav-link {% active_link 'dashboard:news-list' 'active' %}">
+            <i class="nav-icon fa fa-newspaper"></i>
+            <p>News</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:news-comment-list' %}" class="nav-link {% active_link 'dashboard:news-comment-list' 'active' %}">
+            <i class="nav-icon fa fa-comment"></i>
+            <p>News Comments</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'dashboard:event-list' %}" class="nav-link {% active_link 'dashboard:event-list' 'active' %}">
+            <i class="nav-icon fa fa-calendar"></i>
+            <p>Events</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'dashboard:event-comment-list' %}" class="nav-link {% active_link 'dashboard:event-comment-list' 'active' %}">
+            <i class="nav-icon fa fa-comment"></i>
+            <p>Event Comments</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'dashboard:testimonial-list' %}" class="nav-link {% active_link 'dashboard:testimonial-list' 'active' %}">
+            <i class="nav-icon fa fa-comments"></i>
+            <p>Testimonial</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:message-list' %}" class="nav-link {% active_link 'dashboard:message-list' 'active' %}">
+            <i class="nav-icon fa fa-comments"></i>
+            <p>Message</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:reservation-list' %}" class="nav-link {% active_link 'dashboard:reservation-list' 'active' %}">
+            <i class="nav-icon fa fa-bookmark"></i>
+            <p>Reservation</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:about-list' %}" class="nav-link {% active_link 'dashboard:about-list' 'active' %}">
+            <i class="nav-icon fas fa-hotel"></i>
+            <p>About</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'dashboard:service-type-list' %}" class="nav-link {% active_link 'dashboard:service-type-list' 'active' %}">
+            <i class="nav-icon fa fa-filter"></i>
+            <p>Service Type</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:service-video-list' %}" class="nav-link {% active_link 'dashboard:service-video-list' 'active' %}">
+            <i class="nav-icon fa fa-video"></i>
+            <p>Service Video</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard:contact-list' %}" class="nav-link {% active_link 'dashboard:contact-list' 'active' %}">
+            <i class="nav-icon fa fa-address-book"></i>
+            <p>Contact</p>
+          </a>
+        </li>
+       
+        <li class="nav-item">
+          <a href="{% url 'dashboard:newsletter-list' %}" class="nav-link {% active_link 'dashboard:newsletter-list' 'active' %}">
+            <i class="nav-icon fa fa-address-book"></i>
+            <p>Newsletter</p>
+          </a>
+        </li>
+       
+       {% if request.user.is_superuser %}
+                                                                                 
+          <li class="nav-item">
+            <a href="#" class="nav-link {% active_link 'dashboard:user-list' 'active' %}">
+              <i class="nav-icon fa fa-lock"></i>
+              <p>
+                Admin
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'dashboard:user-list' %}" class="nav-link {% active_link 'dashboard:user-list' 'active' %}">
+                  <i class="far fa-user nav-icon"></i>
+                  <p>Users</p>
+                </a>
+              </li>
+      
+            {% endif %}
+            </ul>
+          </li> 
+
+        </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
